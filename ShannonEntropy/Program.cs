@@ -1,17 +1,20 @@
 ﻿using ShannonEntropy;
 
-Core core = new();
 using StreamReader stream = new("source.txt");
 string source = stream.ReadToEnd();
-List<char> chars = source.ToList();
-chars.ForEach(core.Counter);
-core.ViewSingle();
-for (int i = 0; i + 1 < chars.Count;)
-{
-    char first = chars[i++];
-    char second = chars[i];
-    core.Counter(first, second);
-}
 
-core.ViewPair();
+Core core = new();
+core.Fill(source);
+
+CoreHelper helper = new(core.Length);
+helper.ViewSingle(core.SingleChars);
+helper.ViewPair(core.PairChars);
+
+ShannonFano shannonFano = new();
+List<Node<char>> charNodes = shannonFano.BuildTree(core.SingleNodes);
+List<Node<PairChars>> pairNodes = shannonFano.BuildTree(core.PairNodes);
+helper.ViewSingle(charNodes);
+helper.ViewPair(pairNodes);
+
+
 var g = "";

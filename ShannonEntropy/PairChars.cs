@@ -2,9 +2,9 @@
 
 public class PairChars(char first, char second)
 {
-    public string Pair => $"{first}{second}";
+    public string Value => $"{first}{second}";
 
-    public override bool Equals(object? obj) => obj is PairChars pairChars && pairChars.Pair == Pair;
+    public override bool Equals(object? obj) => obj is PairChars pairChars && pairChars.Value == Value;
 
-    public override int GetHashCode() => HashCode.Combine(Pair);
+    public override int GetHashCode() => HashCode.Combine(Value);
 }
